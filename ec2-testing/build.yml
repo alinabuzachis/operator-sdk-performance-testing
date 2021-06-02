@@ -61,6 +61,22 @@
             cidr_ip: 0.0.0.0/0
         rules_egress: []
         vpc_id: "{{ vpc.vpc.id }}"
+    
+    # - name: Create a new EC2 key
+    #   ec2_key:
+    #       name: "{{ aws_key_name }}"
+    #       region: "{{ aws_region }}"
+    #   register: ec2_key_result
+    
+    # - debug:
+    #     var: ec2_key_result
+ 
+    # - name: Save private key
+    #   copy:
+    #     content: "{{ ec2_key_result.key.private_key }}"
+    #     dest: "./{{ aws_key_name }}.pem"
+    #     mode: 0600
+    #   when: ec2_key_result.changed
 
     - name: Provision EC2 instance.
       ec2:
@@ -85,6 +101,9 @@
         count_tag:
           Name: "{{ resource_name }}"
       register: created_instance
+    
+    - debug:
+        var: created_instance
 
     - name: Add EC2 instance to inventory.
       add_host:
@@ -92,7 +111,9 @@
         groups: "aws,{{ item.tags.Name }}"
         ansible_user: ubuntu
         ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
+        #ansible_ssh_private_key_file: "./{{ aws_key_name }}.pem"
       with_items: "{{ created_instance.tagged_instances }}"
+
 
 - hosts: aws
   gather_facts: false

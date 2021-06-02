@@ -4,7 +4,7 @@
   become: true
 
   vars:
-    operator_sdk_version: v1.0.0
+    operator_sdk_version: v1.8.0
     kind_version: v0.8.1
     kubectl_version: v1.19.0
 
@@ -42,14 +42,14 @@
 
     - name: Download Operator SDK.
       get_url:
-        url: "https://github.com/operator-framework/operator-sdk/releases/download/{{ operator_sdk_version }}/{{ item }}-{{ operator_sdk_version }}-x86_64-linux-gnu"
+        url: "https://github.com/operator-framework/operator-sdk/releases/download/{{ operator_sdk_version }}/{{ item }}_linux_amd64"
         dest: /usr/bin/{{ item }}
         mode: 0755
       loop:
         - operator-sdk
         - ansible-operator
         - helm-operator
-
+    
     - name: Download Kind.
       get_url:
         url: https://kind.sigs.k8s.io/dl/{{ kind_version }}/kind-linux-amd64
@@ -63,8 +63,8 @@
   tasks:
     - name: Clone operator-sdk-performance-testing project.
       git:
-        repo: https://github.com/geerlingguy/operator-sdk-performance-testing.git
-        version: master
+        repo: https://github.com/alinabuzachis/operator-sdk-performance-testing.git
+        version: bench
         dest: ~/operator-sdk-performance-testing
 
     - name: Run molecule test scenarios.

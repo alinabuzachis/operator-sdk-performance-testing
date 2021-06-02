@@ -33,5 +33,7 @@
     - name: Build, deploy, benchmark, and undeploy operators.
       include_tasks: tasks/operator-tasks.yml
       loop: ["{{ operator_under_test }}"]
+      register: molecule_result
       loop_control:
         loop_var: operator_type
+
