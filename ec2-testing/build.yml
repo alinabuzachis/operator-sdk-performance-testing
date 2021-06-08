@@ -59,24 +59,12 @@
             from_port: 22
             to_port: 22
             cidr_ip: 0.0.0.0/0
+          #- proto: all
+          #  from_port: 8
+          #  to_port: -1
+          #  cidr_ip: 0.0.0.0/0
         rules_egress: []
         vpc_id: "{{ vpc.vpc.id }}"
-    
-    # - name: Create a new EC2 key
-    #   ec2_key:
-    #       name: "{{ aws_key_name }}"
-    #       region: "{{ aws_region }}"
-    #   register: ec2_key_result
-    
-    # - debug:
-    #     var: ec2_key_result
- 
-    # - name: Save private key
-    #   copy:
-    #     content: "{{ ec2_key_result.key.private_key }}"
-    #     dest: "./{{ aws_key_name }}.pem"
-    #     mode: 0600
-    #   when: ec2_key_result.changed
 
     - name: Provision EC2 instance.
       ec2:
@@ -88,7 +76,7 @@
           - default
         vpc_subnet_id: "{{ vpc_subnet.subnet.id }}"
         assign_public_ip: true
-        instance_type: m5.large
+        instance_type: m5.xlarge
         image: "{{ aws_ec2_ami }}"
         wait: true
         wait_timeout: 500
@@ -111,7 +99,6 @@
         groups: "aws,{{ item.tags.Name }}"
         ansible_user: ubuntu
         ansible_ssh_common_args: '-o StrictHostKeyChecking=no'
-        #ansible_ssh_private_key_file: "./{{ aws_key_name }}.pem"
       with_items: "{{ created_instance.tagged_instances }}"
 
 

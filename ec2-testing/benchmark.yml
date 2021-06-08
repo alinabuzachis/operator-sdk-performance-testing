@@ -80,10 +80,16 @@
         - go
         - helm
 
+    - name: Create a unique ID
+      shell: random_string
+      run_once: true
+      delegate_to: 127.0.0.1
+      register: unique_id
+
     - name: Store results in a local result file.
       copy:
         content: "{{ item.stdout }}"
-        dest: "./result-{{ item.item }}.txt"
+        dest: "./{{ unique_id }}result-{{ item.item }}.txt"
         mode: 0664
       loop: "{{ molecule_result.results }}"
       delegate_to: localhost
