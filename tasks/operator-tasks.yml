@@ -90,7 +90,7 @@
   register: memcached_pods
   until: (memcached_pods.resources | count) >= memcached_cr_count
   delay: 3
-  retries: 120
+  retries: 200
 
 - name: "[B1] Wait for {{ operator_type }} Memcached Pods to be ready."
   command: >
