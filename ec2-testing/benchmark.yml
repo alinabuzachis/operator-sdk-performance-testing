@@ -27,11 +27,11 @@
     - name: Install test dependencies.
       pip:
         name:
-          - ansible
+          - ansible==2.10
           - yamllint
           - docker
-          - molecule
-          - openshift
+          - molecule==3.2.4
+          - openshift==0.11
         state: present
 
     - name: Download kubectl.

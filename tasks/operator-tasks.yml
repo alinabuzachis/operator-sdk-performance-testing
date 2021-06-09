@@ -112,6 +112,10 @@
     namespace: memcached-operator-system
     wait: false
 
+- name: Pause to allow cluster to stabilize.
+  pause:
+    seconds: 10
+
 - name: Deploy {{ memcached_cr_count }} {{ operator_type }} memcached CRs.
   k8s:
     state: present
