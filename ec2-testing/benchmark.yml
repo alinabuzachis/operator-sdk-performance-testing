@@ -5,8 +5,8 @@
 
   vars:
     operator_sdk_version: v1.8.0
-    kind_version: v0.11.1
-    kubectl_version: v1.21.1
+    kind_version: v0.8.1
+    kubectl_version: v1.19.0
 
   pre_tasks:
     - name: Ensure apt caches are up to date.
