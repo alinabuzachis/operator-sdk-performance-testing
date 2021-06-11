@@ -11,6 +11,8 @@
       git:
         repo: https://github.com/alinabuzachis/operator-sdk.git
         version: increase_helm_manager_memory_v1.8
+        #repo: https://github.com/operator-framework/operator-sdk.git
+        #version: "{{ operator_samples_version }}" 
         dest: ./operator-sdk
         force: true
 

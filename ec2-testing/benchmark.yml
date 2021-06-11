@@ -61,6 +61,10 @@
   become: true
 
   tasks:
+    - name: Generate unique number for each host
+      set_fact:
+        random_number: "{{ 100 | random }}"
+  
     - name: Clone operator-sdk-performance-testing project.
       git:
         repo: https://github.com/alinabuzachis/operator-sdk-performance-testing.git
@@ -81,16 +85,10 @@
         - go
         - helm
 
-    - name: Create a unique ID
-      shell: random_string
-      run_once: true
-      delegate_to: 127.0.0.1
-      register: unique_id
-
     - name: Store results in a local result file.
       copy:
         content: "{{ item.stdout }}"
-        dest: "./{{ unique_id }}result-{{ item.item }}.txt"
+        dest: "./{{ random_number }}_result-{{ item.item }}.txt"
         mode: 0664
       loop: "{{ molecule_result.results }}"
       delegate_to: localhost
