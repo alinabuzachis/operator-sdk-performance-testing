@@ -81,7 +81,7 @@
             volume_type: gp2
             volume_size: 200
             delete_on_termination: true
-        exact_count: 5
+        exact_count: 1
         count_tag:
           Name: "{{ resource_name }}"
       register: created_instance

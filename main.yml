@@ -9,8 +9,8 @@
   tasks:
     - name: Clone the operator-sdk project.
       git:
-        repo: https://github.com/operator-framework/operator-sdk.git
-        version: "{{ operator_samples_version }}"
+        repo: https://github.com/alinabuzachis/operator-sdk.git
+        version: increase_helm_manager_memory_v1.8
         dest: ./operator-sdk
         force: true
 

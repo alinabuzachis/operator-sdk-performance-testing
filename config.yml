@@ -24,12 +24,12 @@ image_tag: 1h
 
 # Options to specify ansible version and k8s collection version
 # if ansible_version: '' or k8s_collection_version: '' the default version is used
-ansible_version_to_be_used: '' #2.11.0rc2
+ansible_version_to_be_used: ''
 k8s_collection_version: '' 
 
 # Versions for cluster addons.
 #cert_manager_version: v0.16.1
-cert_manager_version: v0.16.1
+cert_manager_version: v1.2.0
 #prometheus_operator_version: v0.41.1
 prometheus_operator_version: v0.48.1
 metrics_server_version: v0.3.7

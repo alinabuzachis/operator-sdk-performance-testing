@@ -23,7 +23,7 @@
                 effect: NoSchedule
             containers:
               - name: memcached
-                image: docker.io/memcached:1.6.9-alpine
+                image: docker.io/memcached:1.6.0-alpine
 
 - name: Delete the Memcached DaemonSet.
   k8s:
