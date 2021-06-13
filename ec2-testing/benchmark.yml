@@ -84,6 +84,10 @@
         - ansible
         - go
         - helm
+    
+    - name: Pause to allow to get results.
+      pause:
+        seconds: 10
 
     - name: Store results in a local result file.
       copy:
