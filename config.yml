@@ -11,7 +11,7 @@ operator_subdir: memcached-operator
 app_label_selector: app=memcached
 
 # How many CRs to deploy.
-memcached_cr_count: 15
+memcached_cr_count: 3
 
 # What version of operator-sdk to use for testing.
 # NOTE: Keep in sync with operator RELEASE_VERSION in .github/workflows/CI.
