@@ -4,7 +4,7 @@
   become: true
 
   vars:
-    operator_sdk_version: v1.8.0
+    operator_sdk_version: v1.6.2
     kind_version: v0.8.1
     kubectl_version: v1.20.5
 
@@ -92,7 +92,7 @@
     - name: Store results in a local result file.
       copy:
         content: "{{ item.stdout }}"
-        dest: "./3-sdk-1.8.0-k8s-1.2.1/{{ random_number }}_result-{{ item.item }}.txt"
+        dest: "./3-sdk-1.6.2-k8s-1.2.1/{{ random_number }}_result-{{ item.item }}.txt"
         mode: 0664
       loop: "{{ molecule_result.results }}"
       delegate_to: localhost
