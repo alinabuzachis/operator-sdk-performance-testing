@@ -48,7 +48,7 @@
       loop:
         - operator-sdk
         - ansible-operator
-        - helm-operator      
+        #- helm-operator     
     
     - name: Download Kind.
       get_url:
@@ -71,7 +71,7 @@
         version: bench
         dest: ~/operator-sdk-performance-testing
         force: yes
-
+  
     - name: Run molecule test scenarios.
       command: molecule test -s kind
       args:
@@ -82,8 +82,8 @@
       tags: ['molecule']
       loop:
         - ansible
-        - go
-        - helm
+        #- go
+        #- helm
     
     - name: Pause to allow to get results.
       pause:
@@ -92,7 +92,7 @@
     - name: Store results in a local result file.
       copy:
         content: "{{ item.stdout }}"
-        dest: "./3-sdk-1.6.2-k8s-2.0.0-ansible-2.11.0rc2/{{ random_number }}_result-{{ item.item }}.txt"
+        dest: "./3-sdk-1.6.2-k8s-2.0.0/{{ random_number }}_result-{{ item.item }}.txt"
         mode: 0664
       loop: "{{ molecule_result.results }}"
       delegate_to: localhost

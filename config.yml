@@ -24,7 +24,7 @@ image_tag: 1h
 
 # Options to specify ansible version and k8s collection version
 # if ansible_version: '' or k8s_collection_version: '' the default version is used
-ansible_version_to_be_used: '2.11.0rc2'
+ansible_version_to_be_used: ''
 k8s_collection_version: '2.0.0'
 
 # Versions for cluster addons.

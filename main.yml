@@ -7,15 +7,38 @@
     - config.yml
 
   tasks:
-    - name: Clone the operator-sdk project.
+    - name: Clone the operator-sdk project. (v1.8.0)
       git:
         repo: https://github.com/alinabuzachis/operator-sdk.git
         version: increase_helm_manager_memory_v1.8
-        #repo: https://github.com/operator-framework/operator-sdk.git
-        #version: "{{ operator_samples_version }}" 
         dest: ./operator-sdk
         force: true
+      when:
+        - operator_samples_version == 'v1.8.0'
+    
+    - name: Clone the operator-sdk project. (v1.6.2)
+      git:
+        repo: https://github.com/alinabuzachis/operator-sdk.git
+        version: increase_helm_manager_memory_v1.6
+        dest: ./operator-sdk
+        force: true
+      when:
+        - operator_samples_version == 'v1.6.2'
+    
+    - name: Attempt to fix file permissions.
+      file:
+        dest: ./operator-sdk
+        mode: 0777
+        recurse: true
 
+    - name: Ensure the kubernetes.core collection is used (patch)
+      copy:
+        src: ./templates/main.yml
+        dest: ./operator-sdk/testdata/ansible/memcached-operator/roles/memcached/tasks/main.yml
+        follow: no
+      when:
+        - k8s_collection_version == '2.0.0'
+    
     - name: Attempt to fix file permissions.
       file:
         dest: ./operator-sdk
