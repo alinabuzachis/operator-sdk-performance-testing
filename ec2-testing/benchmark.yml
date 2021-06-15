@@ -48,7 +48,7 @@
       loop:
         - operator-sdk
         - ansible-operator
-        #- helm-operator     
+        - helm-operator     
     
     - name: Download Kind.
       get_url:
@@ -82,8 +82,8 @@
       tags: ['molecule']
       loop:
         - ansible
-        #- go
-        #- helm
+        - go
+        - helm
     
     - name: Pause to allow to get results.
       pause:
@@ -92,7 +92,7 @@
     - name: Store results in a local result file.
       copy:
         content: "{{ item.stdout }}"
-        dest: "./sdk-1.8.0-k8s-2.0.0-again/{{ random_number }}_result-{{ item.item }}.txt"
+        dest: "./k8s-2.0.0-400/{{ random_number }}_result-{{ item.item }}.txt"
         mode: 0664
       loop: "{{ molecule_result.results }}"
       delegate_to: localhost
