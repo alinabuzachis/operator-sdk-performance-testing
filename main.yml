@@ -30,8 +30,8 @@
         dest: ./operator-sdk
         mode: 0777
         recurse: true
-
-    - name: Ensure the kubernetes.core collection is used (patch)
+    
+    - name: Ensure the kubernetes.core collection is used (patch) - main.yml
       copy:
         src: ./templates/main.yml
         dest: ./operator-sdk/testdata/ansible/memcached-operator/roles/memcached/tasks/main.yml

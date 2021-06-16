@@ -48,7 +48,7 @@
       loop:
         - operator-sdk
         - ansible-operator
-        - helm-operator     
+        #- helm-operator     
     
     - name: Download Kind.
       get_url:
@@ -82,8 +82,8 @@
       tags: ['molecule']
       loop:
         - ansible
-        - go
-        - helm
+        #- go
+        #- helm
     
     - name: Pause to allow to get results.
       pause:

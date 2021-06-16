@@ -14,35 +14,35 @@
     api_version: v1
     kind: Namespace
     state: present
-  
-- name: Ensure the specified ansible version is used (patch)
-  template:
-    src: Dockerfile-ansible.j2
-    dest: ./operator-sdk/testdata/ansible/memcached-operator/Dockerfile
-    force: yes
-  when:
-    - operator_type == 'ansible'
-    - ansible_version_to_be_used != ''
-    
-- name: Ensure the specified k8s collection version is used (patch)
-  template:
-    src: requirements-k8s.yml.j2
-    dest: ./operator-sdk/testdata/ansible/memcached-operator/requirements.yml
-    force: yes
-  when:
-    - operator_type == 'ansible'
-    - k8s_collection_version != ''
-
-- name: Attempt to fix file permissions.
-  file:
-    dest: ./operator-sdk
-    mode: 0777
-    recurse: true
 
 - name: Set the correct subdirectory for the Go operator example.
   set_fact:
     operator_subdir: v2/memcached-operator
   when: operator_type == 'go'
+
+- name: Ensure the specified k8s collection version is used (patch)
+  copy:
+      src: ./templates/requirements.yml
+      dest: ./operator-sdk/testdata/ansible/memcached-operator/requirements.yml
+      follow: no
+  when:
+    - operator_type == 'ansible'
+    - k8s_collection_version != ''
+    
+- name: Ensure the specified ansible version is used (patch)
+  copy:
+    src: ./templates/Dockerfile
+    dest: ./operator-sdk/testdata/ansible/memcached-operator/Dockerfile
+    follow: no
+  when:
+    - operator_type == 'ansible'
+    - ansible_version_to_be_used != ''
+    
+- name: Attempt to fix file permissions.
+  file:
+    dest: ./operator-sdk
+    mode: 0777
+    recurse: true
 
 - name: Build, push, and deploy the {{ operator_type }} memcached operator.
   shell: "{{ item }}"
