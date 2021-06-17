@@ -11,7 +11,7 @@ operator_subdir: memcached-operator
 app_label_selector: app=memcached
 
 # How many CRs to deploy.
-memcached_cr_count: 400
+memcached_cr_count: 100
 
 # What version of operator-sdk to use for testing.
 # NOTE: Keep in sync with operator RELEASE_VERSION in .github/workflows/CI.
@@ -23,7 +23,7 @@ image_name: operator-sdk-performance-test
 image_tag: 1h
 
 # Options to specify ansible version and k8s collection version
-# if ansible_version: '' or k8s_collection_version: '' the default version is used
+# if ansible_version: '' or k8s_collection_version: '' the default version (2.9 ans 1.2.1 for k8s) is used
 ansible_version_to_be_used: '2.11.0rc2'
 k8s_collection_version: '2.0.0'
 
