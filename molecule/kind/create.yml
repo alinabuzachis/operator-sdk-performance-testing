@@ -6,7 +6,7 @@
 
   tasks:
     - name: Create test kind cluster
-      command: kind create cluster --name perftest --kubeconfig {{ kubeconfig }} --config ~/operator-sdk-performance-testing/kindconfig.yml
+      command: kind create cluster --name perftest --kubeconfig {{ kubeconfig }}
 
     - name: Ensure ~/.kube directory exists.
       file:
