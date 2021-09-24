@@ -1,12 +1,12 @@
-# EC2 Test Environment
+# Provision a Red Hat OpenShift Cluster on AWS
 
-This directory contains a set of playbooks which builds an Amazon EC2 instance, runs the Operator SDK performance benchmarks on it, and destroys the instance.
+This repository contains a set of playbooks and roles which provisions and deprovisions an Amazon EC2 instance acting as a jump server and a Red Hat OpenShift Cluster on AWS. The Amazon EC2 jump server serves as the management server from where we ran the OpenShift installer and CLI tasks.
 
-The playbooks build all the required components (including VPC, networking, security groups, etc.), and you can modify the `vars/main.yml` file to use different defaults if you'd like (e.g. a different `aws_profile` if you don't have a profile named `aworks`).
+The playbooks build all the required components (including VPC, networking, security groups, etc.), and you can modify the `vars/main.yml` file to use different defaults if you'd like.
 
 ## Usage
 
-Make sure you have `boto` installed locally: `pip3 install boto`.
+Make sure you have `boto3` and `botocore` installed locally: `pip3 install boto3 botocore`.
 
 Install requirements:
 
@@ -14,23 +14,21 @@ Install requirements:
 $ ansible-galaxy install -r requirements.yml
 ```
 
-Build the environment:
+Build the Amazon EC2 jump server:
 
 ```
 $ ansible-playbook build.yml
 ```
 
-Run the benchmarks in the environment:
+Provision a Red Hat OpenShift Cluster on AWS in the environment:
 
 ```
-$ ansible-playbook benchmark.yml
+$ ansible-playbook openshift_install.yml
 ```
-
-The results for all three operators are output in the molecule logs stored inside this directory, with the names `result-[ansible|go|helm].txt`, respectively.
 
 ## Cleanup
 
-Once you're finished benchmarking, run the `destroy.yml` playbook to destroy the test environment:
+Once you don't need anymore the setup, run the `destroy.yml` playbook to destroy the test environment:
 
 ```
 $ ansible-playbook destroy.yml
